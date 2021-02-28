@@ -6,7 +6,11 @@ Tracking MAVs from ground robots with adaptive lidar scan integration
 
 TO DO
 
-## How to run it
+## Installation
+
+TO DO
+
+## Run it
 
 TO DO
 
