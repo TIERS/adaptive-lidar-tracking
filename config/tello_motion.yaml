@@ -1,0 +1,5 @@
+position_topic: "/dwm1001/tag/2A24/position"
+drone_cmd_topic: "/tello/cmd_vel"
+circle_radius: 0.5
+takeoff_height: 1.0
+drone_speed: 0.6

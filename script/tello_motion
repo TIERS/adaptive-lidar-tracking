@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import rospy
+import numpy
+
+from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import Twist
+
+class Tello_Motion():
+    def __init__(self):
+        
+        rospy.init_node('tello_motion', anonymous=False) 
+
+        self.uwb_pos = PoseStamped()
+
+        self.cmd_vel = Twist()
+
+        self.postion_topic = rospy.get_param("~position_topic", "/dwm1001/tag/2A24/position")
+        
+        self.drone_cmd_topic = rospy.get_param("~drone_cmd_topic", "/tello/cmd_vel")
+
+        self.circle_radius = rospy.get_param("~circle_radius", 0.5)
+
+        self.takeoff_height = rospy.get_param("~takeoff_height", 1.0)
+
+        self.drone_speed = rospy.get_param("~drone_speed", 0.1)
+
+        self.uwb_sub = rospy.Subscriber(self.postion_topic, PoseStamped, self.uwb_pos_cb)
+
+        self.vel_pub = rospy.Publisher(self.drone_cmd_topic, Twist, queue_size=10)
+
+
+    def uwb_pos_cb(self, msg):
+        self.uwb_pos = msg
+        self.uwb_pos.header.stamp = rospy.Time.now()
+        
+        theta = atan2(msg.pose.position.y, msg.pose.position.x)
+        new_theta = (theta+0.5)%(2*pi)
+
+        now_pos = np.array([msg.pose.position.x, msg.pose.position.y])
+        obj_pos = np.array([cos(new_theta)*self.circle_radius, sin(new_theta)*self.circle_radius])
+ 
+        move_dir = obj_pos - now_pos
+        dist_to_target = numpy.linalg.norm(move_dir)
+
+        if dist_to_target > 0 :
+            move_dir /= dist_to_target
+            velocity = self.drone_speed * move_dir
+        
+            tw = Twist()
+            tw.linear.x = velocity[0]
+            tw.linear.y = velocity[1]
+
+            self.vel_pub.publish(tw)
+
+        else :
+            rospy.logwarn("Dist to target is negative. This should not happen...")
+
+

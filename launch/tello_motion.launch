@@ -1,0 +1,6 @@
+<launch>
+
+    <node name="tello_motion" pkg="adaptive_lidar_tracking" type="tello_motion" respawn="true" output="screen">
+        <rosparam file="$(find adaptive_lidar_tracking)/config/tello_motion.yaml" command="load"/>
+    </node>
+</launch>
