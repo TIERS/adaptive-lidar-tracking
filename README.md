@@ -12,7 +12,19 @@ TO DO
 
 ## Run it
 
-TO DO
+### Tello Motion Start
+tello_motion node is to let tello drone do a certain shape of motion like a circle which is currently supported.
+
+```
+roslaunch adaptive_lidar_tracking tello_motion.launch
+```
+parameters setting includes:
+```
+position_topic: "/dwm1001/tag/2A24/position"         
+drone_cmd_topic: "/tello/cmd_vel" 
+takeoff_height: 1.0 
+drone_speed: 0.6
+```
 
 ## Contact
 
