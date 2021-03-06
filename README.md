@@ -1,5 +1,7 @@
 
-**NOTE:** The code in this repository is being updated/uploaded and only initial versions of some of the ROS nodes are available at the moment. For details about the full implementation (will be available soon) in our website and arXiv
+**NOTE:** The code in this repository is being updated/uploaded and only initial versions of some of the ROS nodes are available at the moment. For details about the full implementation (will be available soon), please visit our website at:
+
+[https://tiers.utu.fi/paper/qingqing2021adaptive](https://tiers.utu.fi/paper/qingqing2021adaptive)
 
 
 # Adaptive lidar tracking
