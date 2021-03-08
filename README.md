@@ -6,6 +6,8 @@
 
 # Adaptive lidar tracking
 
+![](demo.gif)
+
 Tracking MAVs from ground robots with adaptive lidar scan integration
 
 ## Summary
