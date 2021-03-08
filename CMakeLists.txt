@@ -8,7 +8,10 @@ project(adaptive_lidar_tracking)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  pcl_conversions
+  pcl_ros
   geometry_msgs
+  sensor_msgs
   roscpp
   rospy
   std_msgs
@@ -150,6 +153,9 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+add_executable(adpt_tracking src/tracking_node.cpp)
+target_link_libraries(adpt_tracking ${catkin_LIBRARIES})
 
 #############
 ## Install ##
