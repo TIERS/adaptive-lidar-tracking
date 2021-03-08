@@ -1,0 +1,6 @@
+<launch>
+
+    <node name="adpt_tracking" pkg="adaptive_lidar_tracking" type="adpt_tracking" respawn="true" output="screen">
+        <rosparam file="$(find adaptive_lidar_tracking)/config/adpt_tracking.yaml" command="load"/>
+    </node>
+</launch>
